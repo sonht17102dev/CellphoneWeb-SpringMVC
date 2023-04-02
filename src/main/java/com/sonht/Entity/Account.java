@@ -99,4 +99,9 @@ public class Account {
 
 		return messageString;
 	}
+	@Override
+	public String toString() {
+		return "Account [usr=" + usr + ", pwd=" + pwd + ", role=" + role + ", name=" + name + ", address=" + address
+				+ ", phone=" + phone + "]";
+	}
 }
