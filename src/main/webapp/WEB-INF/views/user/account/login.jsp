@@ -7,8 +7,8 @@
 	<div class="containerLogin">
 	    <div class="leftLogin">
 	      <h1>Sign in</h1>
-	      <div>
-			${error == null ? "" : error}
+	      <div style="color: red;">
+			${error}
 			</div>
 	      <form name="login-form" action="checkLogin"  method="post"> 
 	        <div><input type="text" name="username" class="input-box" placeholder="Input your email"></div>
