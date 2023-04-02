@@ -25,9 +25,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
 <link rel="stylesheet" href="<c:url value="/resources/css/admin.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/login.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/signup.css"/>">
 </head>
 <body>
 
@@ -37,10 +37,10 @@
 			<div>
 					<a
 						class="bg-transparent border-0 fw-bold text-decoration-underline"
-						style='color: #ec8816;${usernameAdmin == null ? "display:none;" : ""}' href="logoutAdmin" >Logout</a>
+						style='color: #ec8816;${username == null ? "display:none;" : ""}' href="logoutAdmin" >Logout</a>
 					<a
 						class="bg-transparent border-0 fw-bold text-decoration-underline"
-						style='color: #ec8816;${usernameAdmin == null ? "" : "display:none;"}' href="/CellPhoneShop/admin/login">Login</a>
+						style='color: #ec8816;${username == null ? "" : "display:none;"}' href="/CellPhoneShop/admin/login">Login</a>
 						
 			</div>
 
