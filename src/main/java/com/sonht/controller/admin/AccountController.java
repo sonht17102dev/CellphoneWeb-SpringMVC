@@ -21,47 +21,47 @@ public class AccountController extends BaseController{
 	@Autowired
 	private AccountServiceImpl accountService;
 	
-	@RequestMapping(value = "admin/login", method = RequestMethod.GET)
-	public String adminLogin(HttpSession session) {
-		return "admin/account/login";
+	@RequestMapping(value = "admin/createAccount", method = RequestMethod.GET)
+	public ModelAndView createAccount() {
+		_mvShareAdmin.setViewName("admin/createAccount");
+		return _mvShareAdmin;
 	}
-	
-	@RequestMapping(value = "admin/checkLogin", method = RequestMethod.POST)
-	public ModelAndView loginAdmin(HttpServletRequest request, HttpSession session) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		
-		Account ad = accountService.search(username, password, 2);
-		
-		if (username != null && password != null) {
-			if (username.trim().equals("") && password.trim().equals("")) {
-				_mvShareAdmin.addObject("error", "Please enter username and password");
-				_mvShareAdmin.setViewName("admin/account/login");
-				return _mvShareAdmin;
-			} 
-			else if (ad != null && username.equalsIgnoreCase(ad.getUsr()) && password.equals(ad.getPwd())
-					&& ad.getRole() == 2) {
-				session.setAttribute("usernameAdmin", "Welcome<br/>" + ad.getName());
-				List<Account> list = accountService.getAllAccounts();
-				session.setAttribute("listAccount", list);
-				_mvShareAdmin.setViewName("admin/admin");
-				return _mvShareAdmin;
-			} 
-			else {
-				_mvShareAdmin.addObject("error", "Username or password is invalid");
-				_mvShareAdmin.setViewName("admin/account/login");
+	@RequestMapping(value = "admin/createAccount", method = RequestMethod.POST)
+	public ModelAndView createAccount(HttpServletRequest request, HttpSession session) {
+		String userMail = request.getParameter("usermail");
+		String userName = request.getParameter("username");
+		String userAddress = request.getParameter("address");
+		String userPhone = request.getParameter("phone");
+		String pass = request.getParameter("password");
+		Account acc = new Account(userMail, pass, 1, userName, userAddress, userPhone);
+		if(!acc.validate().equals("")) {
+			request.setAttribute("mess", acc.validate());
+			_mvShare.setViewName("admin/createAccount");
+			return _mvShare;
+		} else {
+			acc = accountService.checkLoginExist(userMail);
+			try {
+				// neu account == null thi duoc signup
+				if(acc == null) {
+					accountService.signup(userMail, pass, userName, userAddress, userPhone);
+					_mvShareAdmin.setViewName("admin/admin");
+					return _mvShareAdmin;
+				} else {
+					throw new NullPointerException();
+				}
+			} catch (NullPointerException e) {
+				request.setAttribute("mess", "Account is existed!");
+				_mvShareAdmin.setViewName("admin/createAccount");
 				return _mvShareAdmin;
 			}
 		}
-		_mvShareAdmin.addObject("error", "");
-		_mvShareAdmin.setViewName("admin/account/login");
-		return _mvShareAdmin;
 	}
 	@RequestMapping(value = "admin/logoutAdmin", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpSession session) {
+	public String logoutAd(HttpServletRequest request, HttpSession session) {
+		session.removeAttribute("username");
 		session.removeAttribute("listAccount");
 		session.removeAttribute("usernameAdmin");
-		return "admin/admin";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "admin/DeleteAccount", method = RequestMethod.GET)
