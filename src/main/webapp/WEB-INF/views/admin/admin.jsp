@@ -26,10 +26,10 @@
 								<td>${o.address}</td>
 								<td>${o.phone}</td>
 								<td>
-									<span style="${usernameAdmin == null ? "display:none;" : ""}">
+									<span style="${username == null ? "display:none;" : ""}">
 									<a href="EditAccount?usermail=${o.usr}"
 											>Update </a> </span>
-									<span style="${usernameAdmin == null ? "display:none;" : ""}">
+									<span style="${username == null ? "display:none;" : ""}">
 									<a href="DeleteAccount?usermail=${o.usr}"
 										onclick="javascript:return confirm('Are you sure?')">
 											Delete</a></span></td>
@@ -61,9 +61,9 @@
 								<td>${o.address}</td>
 								<td>${o.phone}</td>
 								<td>
-									<span style="${usernameAdmin == null ? "display:none;" : ""}"><a
+									<span style="${username == null ? "display:none;" : ""}"><a
 										href="EditAccount?usermail=${o.usr}">Update </a></span>
-									<span style="${usernameAdmin == null ? "display:none;" : ""}"><a
+									<span style="${username == null ? "display:none;" : ""}"><a
 										href="DeleteAccount?usermail=${o.usr}"
 										onclick="javascript:return confirm('Are you sure?')">
 											Delete</a></span></td>
