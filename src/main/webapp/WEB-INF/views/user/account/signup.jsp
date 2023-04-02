@@ -6,6 +6,7 @@
 	<div class="containerRegister">
 		<div class="left">
 			<h1>Register</h1>
+			
 			<form name="signup-form" action="signup" method="post">
 				<div>
 					<input type="text" name="username" class="input-box"
@@ -39,11 +40,11 @@
 		<div class="right">
 			<div class="content">
 				<h1>Welcome new partner!</h1>
-				<p>
+				<p style='${mess != null} ? "display:none;" : ""'>
 				To keep connected with us <br>please input with your personal info<br>
 				
 				</p>
-				<p></p>
+				<p style='color:red'>${mess}</p>
 			</div>
 		</div>
 	</div>
